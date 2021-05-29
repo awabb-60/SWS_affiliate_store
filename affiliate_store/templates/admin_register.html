@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block content %}
+    <h1>Admin Register!</h1>
+
+    <form method="post" action="">
+        {{ form.hidden_tag()}}
+        <div>
+        {{ form.username.label }}
+            {% if form.username.errors %}
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                    <small style="color:#F15D29">{{ error }}</small>
+                {% endfor %}
+            {%else%}
+                {{ form.username }}
+            {% endif %}
+            <br/>
+        </div>
+        <br/>
+        <div>
+        {{ form.password1.label }}
+            {% if form.password1.errors %}
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}
+                    <small style="color:#F15D29">{{ error }}</small>
+                {% endfor %}
+            {%else%}
+                {{ form.password1 }}
+            {% endif %}
+        </div>
+        <br/>
+        <div>
+        {{ form.confirm_password1.label }}
+            {% if form.confirm_password1.errors %}
+                {{ form.confirm_password1 }}
+                {% for error in form.confirm_password1.errors %}
+                    <small style="color:#F15D29">{{ error }}</small>
+                {% endfor %}
+            {%else%}
+                {{ form.confirm_password1 }}
+            {% endif %}
+        </div>
+        <br/>
+        <div>
+        {{ form.password2.label }}
+            {% if form.password2.errors %}
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                    <small style="color:#F15D29">{{ error }}</small>
+                {% endfor %}
+            {%else%}
+                {{ form.password2 }}
+            {% endif %}
+        </div>
+        <div>
+        {{ form.confirm_password2.label }}
+            {% if form.confirm_password2.errors %}
+                {{ form.confirm_password2 }}
+                {% for error in form.confirm_password2.errors %}
+                    <small style="color:#F15D29">{{ error }}</small>
+                {% endfor %}
+            {%else%}
+                {{ form.confirm_password2 }}
+            {% endif %}
+        </div>
+        <br/>
+        <div>
+            {{ form.submit.label }}
+            {{ form.submit }}
+
+        </div>
+    </form>
+
+
+{% endblock content %}

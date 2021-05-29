@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %}
+{% for log in logs %}
+    <div style="margin-left: 10px">
+        <h3> {{ log.admin_name }} <small>{{ log.log_date.strftime('%A.%b.%Y  at  %H-%M') }}</small>  </h3>
+        <p style="margin-left: 30px">{{ log.log_info }}</p>
+    </div>
+{% endfor %}
+{% endblock content %}

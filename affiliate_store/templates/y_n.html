@@ -1,0 +1,6 @@
+{% extends "index.html" %}
+{% block content %}
+<a class="nav-item nav-link" href="{{ url_for('delete_blog', blog_id=id)}}"><i>Yes</i></a>
+<a class="nav-item nav-link" href="{{ url_for('edit_blog')}}"><i>No</i></a>
+
+{% endblock content %}

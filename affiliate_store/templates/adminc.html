@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>admin control</h1>
+<h1>{{ user.username }} is loged in</h1>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div style="color: red">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<ul>
+    <li> <a href="{{ url_for('logout') }}" class="mr-2"> Logout </a></li>
+    <li> <a href="{{ url_for('add_blog') }}" class="mr-2"> Add Bolg </a></li>
+    <li> <a href="{{ url_for('edit_blog') }}" class="mr-2"> Edit Blog </a></li>
+    <li> <a href="{{ url_for('topics') }}" class="mr-2"> Topics </a></li>
+    <li> <a href="{{ url_for('logs') }}" class="mr-2"> Logs </a></li>
+</ul>
+
+{% endblock content %}
+

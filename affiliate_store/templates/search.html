@@ -1,0 +1,21 @@
+{% extends 'index.html'%}
+{% block content %}
+
+
+    <h1 class="search-post-title">Search Results</h1>
+    <div class="search-wrapper">
+      <ul>
+        <li>
+          {% for blog in search_blogs %}
+          <a href="{{ url_for('read_blog', blog_id=blog.id) }}">
+            <div class="search-post-wrapper">
+              <img src="{{ url_for('static', filename='/images/' + blog.image_file) }}" class="image">
+              <h3 class="title">{{ blog.title }}</h3>
+            </div>
+          </a>
+          {% endfor %}
+        </li>
+      </ul>
+    </div>
+
+{% endblock content %}

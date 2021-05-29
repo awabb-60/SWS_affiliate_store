@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="main-content">
+      <h1 class="recent-post-title">Edit Blogs</h1>
+      <a href="{{ url_for('admin_control')}}"><h1>admin control</h1></a>
+      <div class="section search">
+          <h2 class="section-title">Search</h2>
+          <form action="" method="POST">
+            <input type="text" name="edit-search" class="text-input" placeholder="Search...">
+          </form>
+      </div>
+      <br>
+      <br>
+      {% for blog in blogs %}
+        <div style="margin-left:10px;" class="post clearfix">
+          <img " height="100px"  src="{{ url_for('static', filename='/images/' + blog.image_file) }}" alt="" class="post-image">
+          <p>{{ blog.image_file }}</p>
+          <div class="post-preview">
+            <h2>{{ blog.title }}</h2>
+            &nbsp;
+            <i class="far fa-calendar">{{ blog.date_posted.strftime('%A.%b.%Y') }}</i>
+            <p class="preview-text">
+              {{ blog.first_par }}
+            </p>
+            <a href="{{ url_for('update_blog', blog_id=blog.id) }}" class="btn read-more">Update</a>
+            <a href="{{ url_for('y_n', blog_id=blog.id) }}" class="btn read-more">Delete</a>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+      {% endfor %}
+</div>
+
+{% endblock content %}
+

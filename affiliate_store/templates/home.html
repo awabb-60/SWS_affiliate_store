@@ -1,0 +1,98 @@
+{% extends 'index.html'%}
+{% block content %}
+    <!-- Post Slider -->
+    <div class="post-slider">
+      <h1 class="slider-title">Trending Reviews</h1>
+      <i class="fas fa-chevron-left prev"></i>
+      <i class="fas fa-chevron-right next"></i>
+
+      <div class="post-wrapper">
+        {% for blog in trending_blogs %}
+        <div class="post">
+          <a href="{{ url_for('read_blog', blog_id=blog.id) }}"><img src="{{ url_for('static', filename='/images/' + blog.image_file) }}" alt="" class="slider-image"></a>
+          <div class="post-info">
+            <h4><a href="{{ url_for('read_blog', blog_id=blog.id) }}">{{ blog.title }}</a></h4>
+            &nbsp;
+            <i>{{ blog.date_posted.strftime('%A.%b.%Y') }}</i>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+    <!-- // Post Slider -->
+
+    <!-- Content -->
+    <div class="content clearfix">
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <h1 class="recent-post-title">Recent Reviews</h1>
+
+        {% for blog in recent_blogs.items %}
+          <div class="post clearfix">
+            <a href="{{ url_for('read_blog', blog_id=blog.id) }}"><img src="{{ url_for('static', filename='/images/' + blog.image_file) }}" alt="" class="post-image"></a>
+            <div class="post-preview">
+              <a href="{{ url_for('read_blog', blog_id=blog.id) }}"><h2>{{ blog.title }}</h2></a>
+              &nbsp;
+              <i >{{ blog.date_posted.strftime('%A.%b.%Y') }}</i>
+              <p class="preview-text">
+                {{ blog.first_par }}
+              </p>
+              <a href="{{ url_for('read_blog', blog_id=blog.id) }}" class="btn read-more">Read More</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- // Main Content -->
+
+      <div class="sidebar">
+
+        <div class="section search">
+          <h2 class="section-title">Search</h2>
+          <form action="{{ url_for('home') }}" method="POST">
+            <input type="text" name="search-term" class="text-input" placeholder="Search...">
+          </form>
+        </div>
+
+
+        <div class="section topics">
+          <h2 class="section-title">Topics</h2>
+          <ul>
+            {% for topic in topics %}
+              <li><a href="{{ url_for('search', search_data=topic.topic_tags) }}">{{ topic.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+
+
+    <!-- // Content -->
+
+  </div>
+
+  <div class='pag-wrapper'>
+    <ul class="pagination">
+      {% if recent_blogs.has_prev %}
+        <li class="prev"><a  href="{{ url_for('home', page=recent_blogs.prev_num) }}" >«</a></li>
+      {% endif %}
+      {% for page_num in recent_blogs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+          {% if page_num %}
+            {% if recent_blogs.page == page_num %}
+              <li class="active"><a href="{{ url_for('home', page=page_num) }}">  {{ page_num }}  </a></li>
+            {% else %}
+              <li><a href="{{ url_for('home', page=page_num) }}" >  {{ page_num }}  </a></li>
+
+            {% endif %}
+          {% else %}
+           ...
+          {% endif %}
+      {% endfor %}
+      {% if recent_blogs.has_next %}
+        <li class="next"><a href="{{ url_for('home', page=recent_blogs.next_num) }}" >»</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  <!-- // Page Wrapper -->
+{% endblock content %}
